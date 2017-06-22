@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="col-sm-6 col-sm-offset-3">
+			<form action="">
+				<!-- <div class="form-group has-success"> -->
+				<!-- <div class="form-group has-error"> -->
+				<!--<div class="form-group">
+					<label for="">姓名:</label>
+					<input type="text" name="username" data-required class="form-control"
+						data-describedby="userNameMsg" 
+						data-description="userName"
+					>
+					<p class="help-block" id="userNameMsg"></p>
+				</div>
+				<div class="form-group">
+					<label for="">密码:</label>
+					<input type="text" name="pass" data-required data-pattern="^\d{2}$" class="form-control"
+					data-describedby="pass-desc"
+					data-description="pwd"
+					>
+					<p class="help-block" id="pass-desc"></p>
+				</div>
+				<div class="form-group">
+					<label for="">手机号:</label>
+					<input type="text" id="phone" name="phone" data-required class="form-control">
+					<p class="help-block" id="phone-desc"></p>
+				</div>-->
+
+
+				<div class="form-group">
+					<label for="">姓名:</label>
+					<input type="text" name="username" data-required data-pattern="^\d{2,5}$" data-describedby="userNameMsg" data-description="userName" class="form-control">
+					<p class="help-block" id="userNameMsg"></p>
+				</div>
+				<input type="submit" class="btn btn-success" value="提交">
+			</form>
+		</div>
+	</div>
+	<!-- 使用步骤: -->
+	<!-- 
+	第一步:引入jQuery
+	第二部:引入插件
+	 -->
+	<script src="../jquery.js"></script>
+	<script src="Validate-master/jquery-validate.js"></script>
+	<script>
+		// 1 引入jQuery文件
+		// 2 引入 validate 插件
+		// 3 调用 validate 方法，进行一些配置
+		// 4 页面中的表单元素中也需要一定的配置
+		
+
+		$('form').validate({
+			onBlur: true,
+			onSubmit: true,
+			// 阻止表单提交
+			sendForm: false,
+			// 所有的表单元素 验证成功，会调用这个回调函数
+			valid: function () {
+				// console.log('正确');
+				// this 是 form 表单元素
+				// console.log(this);
+			},
+
+			// 只要有一个表单元素 验证失败，会调用这个回调函数
+			invalid: function () {
+				// console.log('错误');
+				// this 是 form 表单元素
+				// console.log(this);
+
+				// has-success 成功
+				// has-error   失败
+			},
+
+			// 每一个验证失败的表单元素都会执行 eachInvalidField
+			eachInvalidField: function() {
+				// console.log('失败', this);
+				// this 就是当前表单元素的jQuery对象
+				this.parent().addClass('has-error').removeClass('has-success');
+			},
+			
+			// 每一个验证成功的表单元素都会执行 eachInvalidField
+			eachValidField: function() {
+				// console.log('成功', this);
+				this.parent().addClass('has-success').removeClass('has-error');
+			},
+
+			// 描述
+			description: {
+				userName: {
+					// 对应 标签中的 data-required 属性
+					required: '老铁，必填！',
+					// 对应 标签中的 data-pattern 属性
+					pattern: '老铁，格式不对！'
+				}
+			}
+		});
+
+
+		/*$('form').validate({
+			// onBlur: true,
+			// onChange: true,
+			onKeyup: true,
+			onSubmit: true,
+			// 组织默认提交,使用 ajax 提交
+			sendForm: false,
+			
+			// 所有的表单元素验证成功，就会调用这个回调函数
+			// submit 事件会触发这个回调函数
+			valid: function() {
+				console.log('valid')
+				console.log(this)
+			},
+
+			// 只要有一个表单元素验证失败，就会调用这个回调函数
+			invalid: function() {
+				console.log('invalid')
+			},
+
+			// // 表单中的每一个元素，都会调用这个回调函数
+			// eachField: function() {
+			// 	console.log('eachField')
+			// },
+
+			// 每一个验证失败的表单元素，都会调用这个回调函数
+			eachInvalidField: function() {
+				// console.log('eachInvalidField')
+				// this 就是一个 jQuery 对象
+				// console.log(this)
+				this.parent().removeClass('has-success').addClass('has-error')
+			},
+
+			// 每一个验证成功的表单元素，都会调用这个回调函数
+			eachValidField: function() {
+				// console.log('eachValidField')
+				this.parent().removeClass('has-error').addClass('has-success')
+
+				// this.next().html('').hide();
+			},
+
+			// 验证失败错误信息的描述
+			description: {
+				userName: {
+					required: '老铁！必填啊',
+					// 验证成功的展示内容
+					valid: ''
+				},
+				pwd: {
+					required: '密码必填',
+					pattern: '需要两位数字',
+					valid: ''
+				}
+			}
+		});*/
+	</script>
+</body>
+
+</html>
